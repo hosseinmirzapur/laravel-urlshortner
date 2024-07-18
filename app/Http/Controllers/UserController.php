@@ -44,7 +44,10 @@ class UserController extends Controller
 
     public function urls()
     {
-
+        $user_urls = $this->service->userUrls();
+        return response()->json([
+            'urls' => $user_urls
+        ]);
     }
 
     public function search()

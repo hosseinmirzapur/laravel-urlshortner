@@ -14,4 +14,9 @@ class User extends Model
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function urls()
+    {
+        return $this->hasMany(Url::class);
+    }
 }
