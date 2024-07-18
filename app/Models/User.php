@@ -10,6 +10,8 @@ class User extends Model
 {
     use HasApiTokens;
 
+    protected $guarded = [];
+
     public function profile()
     {
         return $this->hasOne(Profile::class);

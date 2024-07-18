@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Shortner;
 use App\Http\Services\UserService;
 use Illuminate\Http\Request;
 use function PHPUnit\Framework\isType;
@@ -24,7 +25,7 @@ class UserController extends Controller
         }
 
         return response()->json([
-            'abbreviation' => config('app.url') . '/' . $abbr,
+            'abbreviation' => Shortner::builder($abbr)
         ]);
     }
 
