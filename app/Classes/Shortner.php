@@ -15,4 +15,16 @@ class Shortner
     {
         return Str::random(mt_rand(4,5));
     }
+
+    /**
+     * @param string $abbr
+     * @return string
+     *
+     * Full abbreviation path
+     */
+    public static function builder(string $abbr): string
+    {
+        $appUrl = config('app.url');
+        return "{$appUrl}:8000/api/urls/{$abbr}";
+    }
 }

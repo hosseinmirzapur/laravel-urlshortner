@@ -24,6 +24,6 @@ class DatabaseSeeder extends Seeder
             'fullname' => 'hossein mirzapur'
         ]);
 
-        echo $user->createToken($user->username)->plainTextToken;
+        echo $user->createToken($user->username)->plainTextToken . "\n";
     }
 }
