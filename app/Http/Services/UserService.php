@@ -63,4 +63,26 @@ class UserService
 
         return $allUserUrlsInfo;
     }
+
+    public function search($q)
+    {
+        $urls = Url::query();
+        if (!is_null($q)) {
+            $urls = $urls->where('actual_url', 'like', '%' . $q . '%');
+        }
+        $urls = $urls->get();
+        $urlsWithInfo = [];
+        foreach ($urls as $url) {
+            $urlsWithInfo[] = [
+                'actual_url' => $url->actual_url,
+                'short_url' => $url->short_url,
+                'created_at' => $url->created_at,
+                'username' => $url->user->username,
+                'clicked' => Redis::command('zscore', ['abbr', $url->short_url])
+            ];
+        }
+
+
+        return $urlsWithInfo;
+    }
 }

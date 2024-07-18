@@ -50,8 +50,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function search()
+    public function search(Request $request)
     {
-
+        $q = $request->query('q');
+        $result = $this->service->search($q);
+        return response()->json([
+            'urls' => $result
+        ]);
     }
 }
