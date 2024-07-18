@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         $user->profile()->create([
             'fullname' => 'hossein mirzapur'
         ]);
+
+        echo $user->createToken($user->username)->plainTextToken;
     }
 }
