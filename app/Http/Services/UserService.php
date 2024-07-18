@@ -24,4 +24,15 @@ class UserService
         // return an empty string in case there was recurring urls
         return "";
     }
+
+    public function clicks($limit)
+    {
+        if ($limit != null) {
+            $result = Redis::command('zrevrange', [0, $limit - 1]);
+        } else {
+            $result = Redis::command('zrevrange', [0, -1]);
+        }
+
+        return $result;
+    }
 }

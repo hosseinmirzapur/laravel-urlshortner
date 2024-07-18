@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\UserService;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isType;
 
 class UserController extends Controller
 {
@@ -27,9 +28,18 @@ class UserController extends Controller
         ]);
     }
 
-    public function clicks()
+    public function clicks(Request $request)
     {
-
+        $limit = $request->query('limit');
+        if ($limit != null && !is_numeric($limit)) {
+            return response()->json([
+                'message' => 'limit must be a number'
+            ]);
+        }
+        $urls = $this->service->clicks($limit);
+        return response()->json([
+            'urls' => $urls
+        ]);
     }
 
     public function urls()
